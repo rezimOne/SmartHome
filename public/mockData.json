@@ -1,0 +1,43 @@
+{
+  "smartDevices": {
+    "SmartBulb": [
+      {
+        "type": "bulb",
+        "id": "bulb01",
+        "name": "EcoBulb 200",
+        "connectionState": ["connected", "disconnected", "poorConnection"],
+        "isTurnedOn": false,
+        "brightness": 50,
+        "color": "green"
+      },
+      {
+        "type": "bulb",
+        "id": "bulb02",
+        "name": "FlashBulb 150",
+        "connectionState": ["connected", "disconnected", "poorConnection"],
+        "isTurnedOn": false,
+        "brightness": 150,
+        "color": "yellow"
+      }
+    ],
+    "SmartOutlet": [
+      {
+        "type": "outlet",
+        "id": "outlet01",
+        "name": "EcoOutlet",
+        "connectionState": ["connected", "disconnected", "poorConnection"],
+        "isTurnedOn": false,
+        "powerConsumtion": 10
+      }
+    ],
+    "SmartTemperatureSensor": [
+      {
+        "type": "temperatureSensor",
+        "id": "sensor01",
+        "name": "EcoTempSensor",
+        "connectionState": ["connected", "disconnected", "poorConnection"],
+        "temperature": 30
+      }
+    ]
+  }
+}
