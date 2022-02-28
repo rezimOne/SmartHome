@@ -1,6 +1,6 @@
 {
   "smartDevices": {
-    "SmartBulb": [
+    "SmartBulbs": [
       {
         "type": "bulb",
         "id": "bulb01",
@@ -20,7 +20,7 @@
         "color": "yellow"
       }
     ],
-    "SmartOutlet": [
+    "SmartOutlets": [
       {
         "type": "outlet",
         "id": "outlet01",
@@ -30,7 +30,7 @@
         "powerConsumtion": 10
       }
     ],
-    "SmartTemperatureSensor": [
+    "SmartTemperatureSensors": [
       {
         "type": "temperatureSensor",
         "id": "sensor01",

@@ -17,6 +17,13 @@ export default {
 .device-box {
   background-color: #faebd7;
   height: 200px;
-  width: 200px;
+  width: 350px;
+  position: relative;
+  left: 200px;
+  top: 50px;
+  margin: 5px;
+  padding: 10px;
+  font-size: .9rem;
+  border-radius: 15px;
 }
 </style>

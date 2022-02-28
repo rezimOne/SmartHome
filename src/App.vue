@@ -4,7 +4,7 @@
   </div>
 </template>
 <script lang="ts">
-import SmartDevice from './components/SmartDevice.vue';
+import SmartDevice from './components/SmartHome.vue';
 export default {
   name: 'App',
   components: {
