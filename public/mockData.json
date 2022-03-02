@@ -1,43 +1,63 @@
 {
-  "smartDevices": {
-    "SmartBulbs": [
-      {
-        "type": "bulb",
-        "id": "bulb01",
-        "name": "EcoBulb 200",
-        "connectionState": ["connected", "disconnected", "poorConnection"],
-        "isTurnedOn": false,
-        "brightness": 50,
-        "color": "green"
-      },
-      {
-        "type": "bulb",
-        "id": "bulb02",
-        "name": "FlashBulb 150",
-        "connectionState": ["connected", "disconnected", "poorConnection"],
-        "isTurnedOn": false,
-        "brightness": 150,
-        "color": "yellow"
-      }
-    ],
-    "SmartOutlets": [
-      {
-        "type": "outlet",
-        "id": "outlet01",
-        "name": "EcoOutlet",
-        "connectionState": ["connected", "disconnected", "poorConnection"],
-        "isTurnedOn": false,
-        "powerConsumtion": 10
-      }
-    ],
-    "SmartTemperatureSensors": [
-      {
-        "type": "temperatureSensor",
-        "id": "sensor01",
-        "name": "EcoTempSensor",
-        "connectionState": ["connected", "disconnected", "poorConnection"],
-        "temperature": 30
-      }
-    ]
-  }
+  "smartDevices": [
+    {
+      "type": "bulb",
+      "id": "bulb01",
+      "name": "EcoBulb 200",
+      "connectionState": "disconnected",
+      "isTurnedOn": false,
+      "brightness": 50,
+      "color": "green"
+    },
+    {
+      "type": "bulb",
+      "id": "bulb02",
+      "name": "FlashBulb 150",
+      "connectionState": "disconnected",
+      "isTurnedOn": false,
+      "brightness": 150,
+      "color": "yellow"
+    },
+    {
+      "type": "outlet",
+      "id": "outlet01",
+      "name": "EcoOutlet",
+      "connectionState": "disconnected",
+      "isTurnedOn": false,
+      "powerConsumtion": 10
+    },
+    {
+      "type": "temperature sensor",
+      "id": "sensor01",
+      "name": "EcoTempSensor",
+      "connectionState": "disconnected",
+      "temperature": 30
+    },
+    {
+      "type": "bulb",
+      "id": "bulb03",
+      "name": "BulletBulb 2000",
+      "connectionState": "disconnected",
+      "isTurnedOn": false,
+      "brightness": 850,
+      "color": "violet"
+    },
+    {
+      "type": "bulb",
+      "id": "bulb04",
+      "name": "SunBulb",
+      "connectionState": "disconnected",
+      "isTurnedOn": false,
+      "brightness": 120,
+      "color": "orange"
+    },
+    {
+      "type": "outlet",
+      "id": "outlet02",
+      "name": "NiceOutlet",
+      "connectionState": "disconnected",
+      "isTurnedOn": false,
+      "powerConsumtion": 15
+    }
+  ]
 }

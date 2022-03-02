@@ -9,6 +9,9 @@ const actions = {
     })
     .catch(err => console.log(err))
   },
+  saveCurrentDeviceMode({ commit }, payload: any): any {
+    commit('setCurrentDeviceMode', payload);
+  }
 }
 export default actions;
  // fetch('./mockData.json')

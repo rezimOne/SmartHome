@@ -10,6 +10,9 @@ export default {
   components: {
     SmartDevice
   },
+   created() {
+    this.$store.dispatch('saveStoreSmartDevices')
+  }
 };
 </script>
 <style lang="scss" scoped>

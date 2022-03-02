@@ -1,5 +1,5 @@
 export type State = {
-  smartDevices: {}
+  mySmartDevices: {},
 }
 export interface SmartBulb {
   type: 'bulb',

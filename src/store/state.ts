@@ -1,4 +1,4 @@
 const state = {
-  smartDevices: {}
+  mySmartDevices: {}
 }
 export default state;

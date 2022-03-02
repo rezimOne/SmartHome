@@ -1,16 +1,14 @@
 <template>
   <div class="smart-home-box">
-    <ToggleSwitch v-on:change="launchSmartHome" />
     <MyClock />
     <ul class="device-categories">
       <li
-        v-for="(categoryTitle, index) in deviceCategories"
-        :key="index"
-        @click="devicesByCategoryTitle(categoryTitle)">
+        v-for="(type, id) in deviceTypes"
+        :key="id"
+        @click="devicesByType(type)">
         <div class="category-item">
-          <img :src="setSmartDeviceImg(categoryTitle)" class="device-img">
-          <!-- <div class="status">Connected</div> -->
-          <p>{{ categoryTitle }}</p>
+          <img :src="setSmartDeviceImg(type)" class="device-img">
+          <p>{{ type }}</p>
         </div>
       </li>
     </ul>
@@ -19,65 +17,75 @@
         class="smart-device"
         v-for="device in smartDevices"
         :key="device.id"
-        @click="toggleDeviceBox">
-        <div>TYPE: {{device.type}}</div>
-        <div>NAME: {{device.name}}</div>
-        <div>STATUS: {{device.connectionState[0]}}</div>
+        @click="showDeviceDetails(device)">
+        <header>
+          <img :src="setSmartDeviceImg(device.type)">
+          <div>
+            <div>TYPE: <p>{{ device.type }}</p></div>
+            <div>STATUS: <p>{{ device.connectionState }}</p></div>
+          </div>
+        </header>
+        <section>
+          <div><p>{{ device.name }}</p></div>
+          <span>ROOM: </span>
+        </section>
       </li>
     </ul>
     <DeviceWrapper
       :smartDevices="smartDevices"
+      :deviceDetails="deviceDetails"
       v-show="showDeviceBox"
     />
   </div>
 </template>
 <script lang="ts">
 import DeviceWrapper from './DeviceWrapper.vue'
-import ToggleSwitch from '../utils/ToggleSwitch.vue'
 import MyClock from '../utils/MyClock.vue'
 export default {
   name: 'SmartDevice',
-  components: { DeviceWrapper, ToggleSwitch, MyClock },
+  components: { DeviceWrapper, MyClock },
   data() {
     return {
-      deviceCategories:[],
-      smartDevices: {},
+      smartDevices: [],
       showDeviceBox: false,
       deviceImages: {
         bulbImg: require('../assets/img/smartBulb.svg'),
         temperatureSensorImg: require('../assets/img/temperatureSensor.svg'),
         outletImg: require('../assets/img/smartOutlet.svg')
-      }
+      },
+      deviceDetails: {}
     }
   },
   methods: {
-    devicesByCategoryTitle(categoryTitle: string) {
-      this.smartDevices = this.$store.state.smartDevices[categoryTitle];
+    showDeviceDetails(device: {}) {
+      this.showDeviceBox = true;
+      this.deviceDetails = device;
     },
-    launchSmartHome() {
-      this.deviceCategories = this.$store.getters.getDeviceCategoryTitles;
-    },
-    toggleDeviceBox() {
-      this.showDeviceBox = !this.showDeviceBox;
-    },
-    setSmartDeviceImg(categoryTitle: string) {
-      if(this.deviceCategories) {
-        if(categoryTitle === this.deviceCategories[0]) {
+    setSmartDeviceImg(type: string) {
+      if(this.deviceTypes) {
+        if(type === 'bulb') {
           return this.deviceImages.bulbImg;
         }
-        if(categoryTitle === this.deviceCategories[1]) {
+        if(type === 'outlet') {
           return this.deviceImages.outletImg;
         }
-        if(categoryTitle === this.deviceCategories[2]) {
+        if(type === 'temperature sensor') {
           return this.deviceImages.temperatureSensorImg;
         }
         return this;
       }
+    },
+    devicesByType(type: string) {
+      this.smartDevices = this.$store.getters.getDevices.filter((item: {}) => item['type'] === type);
+      console.log(this.smartDevices)
     }
   },
-  created() {
-    this.$store.dispatch('saveStoreSmartDevices')
-  }
+  computed: {
+    deviceTypes: function() {
+      const myTypes = Object.values(this.$store.getters.getDevices).map((item: {}) => item['type']);
+      return [...new Set(myTypes)];
+    },
+  },
 }
 </script>
 <style lang="scss">
@@ -96,7 +104,7 @@ export default {
   list-style: none;
   margin: 0;
   padding: 0;
-  bottom: 80px;
+  bottom: 15px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -112,9 +120,10 @@ export default {
   flex-direction: column;
   overflow: hidden;
   font-size: 0.8rem;
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.079);
   cursor: pointer;
   &:hover {
-    background-color: #c5e3ec;
+    background-color: #c6eca2;
   }
   .device-img {
     height: 40px;
@@ -134,7 +143,6 @@ export default {
     margin: 0;
     padding: 5px;
     word-wrap: break-word;
-
     height: 35px;
   }
 }
@@ -142,22 +150,53 @@ export default {
   position: absolute;
   list-style: none;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   padding: 0;
   margin: 0;
   top: 50px;
-  font-size: .9rem;
+  flex-wrap: wrap;
 }
 .smart-device {
-  background-color: #90a6ec;
-  width: 150px;
-  height: 50px;
-  margin-bottom: 5px;
+  background-color: #7cb5ea;
+  width: 155px;
+  min-height: 155px;
+  margin-bottom: 10px;
   margin-left: 20px;
   display: flex;
   flex-direction: column;
   border-radius: 15px;
   padding: 10px;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.14);
+  }
+  header {
+    background-color: #98c7ec;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    border-radius: 10px;
+    padding: 3px;
+    line-height: 20px;
+    font-size: 0.8rem;
+    p {
+      margin: 0;
+      display: inline-block;
+    }
+  }
+  section {
+    display: block;
+    line-height: 8px;
+    padding: 5px;
+  }
+  img {
+    width: 22px;
+    margin: 0 6px;
+
+  }
+  &:hover {
+    background-color:#c6eca2;
+  }
 }
 
 </style>

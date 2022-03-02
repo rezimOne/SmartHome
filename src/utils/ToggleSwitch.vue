@@ -61,9 +61,8 @@ export default {
   user-select: none;
   cursor: pointer;
   position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 77%;
 }
 .toggle-button input[type="checkbox"] {
   opacity: 0;
@@ -73,9 +72,9 @@ export default {
 }
 .toggle-button .toggle-switch {
   display: inline-block;
-  height: 40px;
-  border-radius: 20px;
-  width: 80px;
+  height: 30px;
+  border-radius: 15px;
+  width: 60px;
   background: #7cb5ea;
   box-shadow: inset 0 0 1px #BFCBD9;
   position: relative;
@@ -85,9 +84,9 @@ export default {
   content: "";
   position: absolute;
   display: block;
-  height: 34px;
-  width: 34px;
-  border-radius: 17px;
+  height: 24px;
+  width: 24px;
+  border-radius: 12px;
   top: 3px;
   left: 3px;
   transform: translateX(0);
@@ -103,10 +102,10 @@ export default {
   opacity:0;
 }
 .active .toggle-switch {
-  background: #ededd7;
+  background: #404979;
 }
 .active .toggle-switch::after {
-  left: 42px;
-  background: #7cb5ea;
+  left: 33px;
+  background: #60ec83;
 }
 </style>
