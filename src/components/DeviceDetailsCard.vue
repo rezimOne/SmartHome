@@ -10,34 +10,40 @@
         </li>
       </ul>
     </section>
+    <button class="close-button" @click="closeDeviceDetailsCard"><p>+</p></button>
     <ToggleSwitch v-on:change="changeCurrentDeviceMode" />
   </div>
 </template>
 <script lang="ts">
 import ToggleSwitch from '../utils/ToggleSwitch.vue'
 export default {
-  name: 'DeviceWrapper',
+  name: 'DeviceDetailsCard',
   components: { ToggleSwitch },
-  props: ['deviceDetails', 'smartDevices'],
+  props: ['deviceDetails', 'smartDevices', 'closeDeviceDetailsCard'],
   data(){
     return {
-      myPropsArr: []
     }
   },
   methods: {
-    changeCurrentDeviceMode(){
-      this.$store.dispatch('saveCurrentDeviceMode', 1)
-    },
+    changeCurrentDeviceMode() {
+      if(this.smartDevices) {
+        this.smartDevices.filter((item: {}) => {
+          if(item['id'] === this.deviceDetails.id) {
+          this.deviceDetails.isTurnedOn = !this.deviceDetails.isTurnedOn;
+          }
+        });
+      }
+    }
   },
   computed: {
     deviceProps: function() {
-      const propsByDevice = Object.entries(this.deviceDetails);
+      const propsByDevice = Object.entries(this.deviceDetails)
       return propsByDevice;
     },
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .device-box {
   background-color: #faebd7;
   height: 240px;
@@ -57,7 +63,7 @@ export default {
   padding: 0;
 }
 .wrapper {
-  background-color: rgb(215, 219, 227);
+  background-color: #d7dbe3;
   width: 260px;
   margin-bottom: 6px;
   padding: 4px;
@@ -69,6 +75,25 @@ export default {
   }
   .device-prop {
     width: 120px;
+  }
+}
+.close-button {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  text-align: center;
+  line-height: 50%;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  border: none;
+  border-radius: 15px;
+  background-color: #faebd7;
+  color: #7cb5ea;
+  p {
+    transform: rotate(45deg);
+    font-size: 1.95rem;
+    margin: auto;
   }
 }
 </style>

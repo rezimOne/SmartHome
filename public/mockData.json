@@ -30,6 +30,7 @@
       "type": "temperature sensor",
       "id": "sensor01",
       "name": "EcoTempSensor",
+      "isTurnedOn": false,
       "connectionState": "disconnected",
       "temperature": 30
     },

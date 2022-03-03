@@ -17,12 +17,12 @@
         class="smart-device"
         v-for="device in smartDevices"
         :key="device.id"
-        @click="showDeviceDetails(device)">
+        @click="showDeviceDetailsCard(device)">
         <header>
           <img :src="setSmartDeviceImg(device.type)">
           <div>
             <div>TYPE: <p>{{ device.type }}</p></div>
-            <div>STATUS: <p>{{ device.connectionState }}</p></div>
+            <div>STATUS: <p>{{ device.isTurnedOn ? 'ON' : 'OFF' }}</p></div>
           </div>
         </header>
         <section>
@@ -31,23 +31,24 @@
         </section>
       </li>
     </ul>
-    <DeviceWrapper
+    <DeviceDetailsCard
       :smartDevices="smartDevices"
       :deviceDetails="deviceDetails"
-      v-show="showDeviceBox"
+      :closeDeviceDetailsCard="closeDeviceDetailsCard"
+      v-show="isActiveDeviceDetailsCard"
     />
   </div>
 </template>
 <script lang="ts">
-import DeviceWrapper from './DeviceWrapper.vue'
+import DeviceDetailsCard from './DeviceDetailsCard.vue'
 import MyClock from '../utils/MyClock.vue'
 export default {
   name: 'SmartDevice',
-  components: { DeviceWrapper, MyClock },
+  components: { DeviceDetailsCard, MyClock },
   data() {
     return {
       smartDevices: [],
-      showDeviceBox: false,
+      isActiveDeviceDetailsCard: false,
       deviceImages: {
         bulbImg: require('../assets/img/smartBulb.svg'),
         temperatureSensorImg: require('../assets/img/temperatureSensor.svg'),
@@ -57,9 +58,12 @@ export default {
     }
   },
   methods: {
-    showDeviceDetails(device: {}) {
-      this.showDeviceBox = true;
-      this.deviceDetails = device;
+    showDeviceDetailsCard(device: {}) {
+      this.isActiveDeviceDetailsCard = true;
+      this.deviceDetails = this.$store.getters.getDeviceDetailsById(device)
+    },
+    closeDeviceDetailsCard() {
+      this.isActiveDeviceDetailsCard = false;
     },
     setSmartDeviceImg(type: string) {
       if(this.deviceTypes) {
@@ -78,17 +82,18 @@ export default {
     devicesByType(type: string) {
       this.smartDevices = this.$store.getters.getDevices.filter((item: {}) => item['type'] === type);
       console.log(this.smartDevices)
+      this.isActiveDeviceDetailsCard = false;
     }
   },
   computed: {
     deviceTypes: function() {
-      const myTypes = Object.values(this.$store.getters.getDevices).map((item: {}) => item['type']);
-      return [...new Set(myTypes)];
-    },
-  },
+      const myDeviceTypes = Object.values(this.$store.getters.getDevices).map((item: {}) => item['type']);
+      return [...new Set(myDeviceTypes)];
+    }
+  }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .smart-home-box {
   height: 95vh;
   width: 600px;
@@ -129,11 +134,6 @@ export default {
     height: 40px;
     margin: 5px;
   }
-  // .status {
-  //   position: relative;
-  //   text-align: center;
-  //   background-color: #5ee769;
-  // }
   p {
     text-align: center;
     position: relative;
@@ -192,11 +192,10 @@ export default {
   img {
     width: 22px;
     margin: 0 6px;
-
   }
   &:hover {
     background-color:#c6eca2;
   }
 }
-
 </style>
+
