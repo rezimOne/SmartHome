@@ -23,5 +23,6 @@ export interface SmartTemperatureSensor {
   id: string,
   name: string,
   connectionState: string,
+  isTurnedOn: boolean,
   temperature: number
 }

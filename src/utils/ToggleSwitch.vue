@@ -12,8 +12,8 @@ export default {
       default: false
     },
     labelEnableText: {
-    type: String,
-    default: 'On'
+      type: String,
+      default: 'On'
     },
     labelDisableText: {
       type: String,

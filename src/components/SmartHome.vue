@@ -35,7 +35,7 @@
       :smartDevices="smartDevices"
       :deviceDetails="deviceDetails"
       :closeDeviceDetailsCard="closeDeviceDetailsCard"
-      v-show="isActiveDeviceDetailsCard"
+      v-if="isActiveDeviceDetailsCard"
     />
   </div>
 </template>
@@ -166,10 +166,8 @@ export default {
   flex-direction: column;
   border-radius: 15px;
   padding: 10px;
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.14);
   cursor: pointer;
-  &:hover {
-    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.14);
-  }
   header {
     background-color: #98c7ec;
     display: flex;
