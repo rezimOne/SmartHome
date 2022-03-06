@@ -24,7 +24,7 @@
       "name": "EcoOutlet",
       "connectionState": "disconnected",
       "isTurnedOn": false,
-      "powerConsumtion": 10
+      "powerConsumption": 10
     },
     {
       "type": "temperature sensor",
@@ -44,21 +44,12 @@
       "color": "violet"
     },
     {
-      "type": "bulb",
-      "id": "bulb04",
-      "name": "SunBulb",
-      "connectionState": "disconnected",
-      "isTurnedOn": false,
-      "brightness": 120,
-      "color": "orange"
-    },
-    {
       "type": "outlet",
       "id": "outlet02",
       "name": "NiceOutlet",
       "connectionState": "disconnected",
       "isTurnedOn": false,
-      "powerConsumtion": 15
+      "powerConsumption": 15
     }
   ]
 }

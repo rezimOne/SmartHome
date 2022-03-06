@@ -21,12 +21,12 @@
         <header>
           <img :src="setSmartDeviceImg(device.type)">
           <div>
-            <div>TYPE: <p>{{ device.type }}</p></div>
             <div>STATUS: <p>{{ device.isTurnedOn ? 'ON' : 'OFF' }}</p></div>
           </div>
         </header>
         <section>
           <div><p>{{ device.name }}</p></div>
+          <div><p>{{ device.connectionState }}</p></div>
           <span>ROOM: </span>
         </section>
       </li>
