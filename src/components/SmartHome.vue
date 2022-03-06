@@ -8,7 +8,7 @@
         @click="devicesByType(type)">
         <div class="category-item">
           <img :src="setSmartDeviceImg(type)" class="device-img">
-          <p>{{ type }}</p>
+          <p>{{ type | formatProp }}</p>
         </div>
       </li>
     </ul>
@@ -25,9 +25,9 @@
           </div>
         </header>
         <section>
-          <div><p>{{ device.name }}</p></div>
-          <div><p>{{ device.connectionState }}</p></div>
-          <span>ROOM: </span>
+          <div><p>{{ device.name | formatProp }}</p></div>
+          <div><p>{{ device.connectionState | formatProp }}</p></div>
+          <!-- <span>ROOM: </span> -->
         </section>
       </li>
     </ul>
@@ -73,7 +73,7 @@ export default {
         if(type === 'outlet') {
           return this.deviceImages.outletImg;
         }
-        if(type === 'temperature sensor') {
+        if(type === 'temperatureSensor') {
           return this.deviceImages.temperatureSensorImg;
         }
         return this;
@@ -90,7 +90,13 @@ export default {
       const myDeviceTypes = Object.values(this.$store.getters.getDevices).map((item: {}) => item['type']);
       return [...new Set(myDeviceTypes)];
     }
-  }
+  },
+  filters: {
+    formatProp(item: string) {
+      const result = item.replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+      return result.charAt(0).toUpperCase() + result.slice(1);
+    }
+  },
 }
 </script>
 <style lang="scss" scoped>
@@ -179,7 +185,7 @@ export default {
     font-size: 0.8rem;
     p {
       margin: 0;
-      display: inline-block;
+      display: block;
     }
   }
   section {

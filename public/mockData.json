@@ -4,7 +4,7 @@
       "type": "bulb",
       "id": "bulb01",
       "name": "EcoBulb 200",
-      "connectionState": "disconnected",
+      "connectionState": "poorConnection",
       "isTurnedOn": false,
       "brightness": 50,
       "color": "green"
@@ -27,7 +27,7 @@
       "powerConsumption": 10
     },
     {
-      "type": "temperature sensor",
+      "type": "temperatureSensor",
       "id": "sensor01",
       "name": "EcoTempSensor",
       "isTurnedOn": false,

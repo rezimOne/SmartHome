@@ -4,7 +4,7 @@
       <ul class="device-data">
         <li v-for="([devicePropName, devicePropValue], index) in deviceProps" :key="index">
           <div class="wrapper">
-            <p class="device-prop-name">{{ devicePropName | formatProp }}:</p>
+            <p class="device-prop-name">{{ formatValue(devicePropName) }}:</p>
             <p class="device-prop-value">{{ formatValue(devicePropValue) }}</p>
           </div>
         </li>
@@ -33,12 +33,6 @@ export default {
   },
   data(){
     return {
-    }
-  },
-  filters: {
-    formatProp(item: string) {
-      const result = item.replace(/([a-z0-9])([A-Z])/g, '$1 $2')
-      return result.charAt(0).toUpperCase() + result.slice(1);
     }
   },
   methods: {
@@ -107,7 +101,8 @@ export default {
     // }
     formatValue(item: string | number) {
       if(typeof item == 'string') {
-        return item.charAt(0).toUpperCase() + item.slice(1);
+        const result = item.replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+        return result.charAt(0).toUpperCase() + result.slice(1);
       } else {
       return `${item} ${this.devicePropValueUnits}`;
       }
@@ -119,7 +114,13 @@ export default {
       .filter(item => {
         return !['id', 'type', 'name', 'isTurnedOn'].includes(item[0]);
       });
-      return propsByDevice;
+      // if(propsByDevice[1][0] === 'brightness') {
+      //   propsByDevice[1][1] = 'bright slider';
+      // }
+      // if(propsByDevice[1][0] === 'temperature') {
+      //   propsByDevice[1][1] = 'temp slider';
+      // }
+      return propsByDevice
     },
     devicePropValueUnits: function() {
       if (this.deviceProps[1][0] === 'brightness') {
@@ -145,19 +146,17 @@ export default {
 <style lang="scss" scoped>
 .device-card {
   background-color: #faebd7;
-  height: 240px;
+  height: 200px;
   padding-top: 1px;
   padding-left: 10px;
   width: 360px;
-  position: absolute;
-  left: 200px;
-  top: 235px;
-  margin: 5px;
+  position: relative;
+  top: 245px;
+  margin: 0 auto;
   font-size: .9rem;
   border-radius: 15px;
   touch-action: none;
   user-select: none;
-  transform: translate(0px, 0px);
 }
 .device-data {
   font-size: .9rem;
