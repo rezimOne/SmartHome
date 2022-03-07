@@ -3,8 +3,8 @@
     {
       "type": "bulb",
       "id": "bulb01",
-      "name": "EcoBulb 200",
-      "connectionState": "poorConnection",
+      "name": "Ecobulb 200",
+      "connectionState": "",
       "isTurnedOn": false,
       "brightness": 50,
       "color": "green"
@@ -12,42 +12,42 @@
     {
       "type": "bulb",
       "id": "bulb02",
-      "name": "FlashBulb 150",
-      "connectionState": "disconnected",
+      "name": "Flashbulb 150",
+      "connectionState": "",
       "isTurnedOn": false,
-      "brightness": 150,
+      "brightness": 80,
       "color": "yellow"
     },
     {
       "type": "outlet",
       "id": "outlet01",
-      "name": "EcoOutlet",
-      "connectionState": "disconnected",
+      "name": "Ecooutlet",
+      "connectionState": "",
       "isTurnedOn": false,
       "powerConsumption": 10
     },
     {
       "type": "temperatureSensor",
       "id": "sensor01",
-      "name": "EcoTempSensor",
+      "name": "Ecotemp",
       "isTurnedOn": false,
-      "connectionState": "disconnected",
+      "connectionState": "",
       "temperature": 30
     },
     {
       "type": "bulb",
       "id": "bulb03",
-      "name": "BulletBulb 2000",
-      "connectionState": "disconnected",
+      "name": "Bulletbulb 2000",
+      "connectionState": "",
       "isTurnedOn": false,
-      "brightness": 850,
+      "brightness": 100,
       "color": "violet"
     },
     {
       "type": "outlet",
       "id": "outlet02",
-      "name": "NiceOutlet",
-      "connectionState": "disconnected",
+      "name": "Niceoutlet",
+      "connectionState": "",
       "isTurnedOn": false,
       "powerConsumption": 15
     }

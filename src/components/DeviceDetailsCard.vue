@@ -1,17 +1,23 @@
 <template>
   <div class="device-card">
-    <section class="device-details">
-      <ul class="device-data">
-        <li v-for="([devicePropName, devicePropValue], index) in deviceProps" :key="index">
-          <div class="wrapper">
-            <p class="device-prop-name">{{ formatValue(devicePropName) }}:</p>
-            <p class="device-prop-value">{{ formatValue(devicePropValue) }}</p>
-          </div>
-        </li>
-      </ul>
-    </section>
+    <ul class="device-data">
+      <li v-for="([devicePropName, devicePropValue], index) in deviceProps" :key="index">
+        <div class="wrapper">
+          <p class="device-prop-name">{{ formatValue(devicePropName) }}:</p>
+          <p class="device-prop-value">{{ formatValue(devicePropValue) }}</p>
+        </div>
+      </li>
+    </ul>
     <button class="close-button" @click="closeDeviceDetailsCard"><p>+</p></button>
-    <ToggleSwitch v-on:change="changeCurrentDeviceMode" />
+    <div class="simulation-area">
+      <ToggleSwitch v-on:change="changeCurrentDeviceMode" />
+      <div class="state-simulator">
+        <select v-model="currentConnectionState">
+          <option v-for="(state, index) in connectionStates" :key="index">{{ state }}</option>
+        </select>
+        <button @click="setState">Set state</button>
+      </div>
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -33,6 +39,8 @@ export default {
   },
   data(){
     return {
+      currentConnectionState: '',
+      connectionStates: ['connected', 'disconnected', 'poorConnection']
     }
   },
   methods: {
@@ -69,7 +77,7 @@ export default {
             outer: 'parent'
           }),
           interact.modifiers.restrictSize({
-            min: { width: 200, height: 200 }
+            min: { width: 200, height: 225 }
           })
         ]
       })
@@ -106,6 +114,9 @@ export default {
       } else {
       return `${item} ${this.devicePropValueUnits}`;
       }
+    },
+    setState(){
+      this.deviceDetails.connectionState = this.currentConnectionState;
     }
   },
   computed: {
@@ -124,7 +135,7 @@ export default {
     },
     devicePropValueUnits: function() {
       if (this.deviceProps[1][0] === 'brightness') {
-        return 'lum';
+        return '%';
       }
       if (this.deviceProps[1][0] === 'powerConsumption') {
         return 'W';
@@ -146,27 +157,31 @@ export default {
 <style lang="scss" scoped>
 .device-card {
   background-color: #faebd7;
-  height: 200px;
-  padding-top: 1px;
-  padding-left: 10px;
+  height: 225px;
   width: 360px;
   position: relative;
-  top: 245px;
+  top: 240px;
   margin: 0 auto;
   font-size: .9rem;
   border-radius: 15px;
   touch-action: none;
   user-select: none;
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.14);
+  overflow: hidden;
 }
 .device-data {
   font-size: .9rem;
   list-style: none;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  width: 88%;
+  margin: 0 auto;
+  padding-top: 30px;
 }
 .wrapper {
   background-color: #d7dbe3;
-  width: 260px;
-  margin-bottom: 6px;
+  margin-bottom: 7px;
   padding: 4px;
   border-radius: 10px;
   p {
@@ -180,21 +195,34 @@ export default {
 }
 .close-button {
   position: absolute;
-  right: 5px;
-  top: 5px;
+  right: 2px;
+  top: 2px;
   text-align: center;
   line-height: 50%;
   cursor: pointer;
-  height: 30px;
-  width: 30px;
+  height: 28px;
+  width: 28px;
   border: none;
-  border-radius: 15px;
+  border-radius: 14px;
   background-color: #faebd7;
   color: #7cb5ea;
   p {
     transform: rotate(45deg);
-    font-size: 1.95rem;
+    font-size: 1.8rem;
     margin: auto;
+  }
+}
+.simulation-area {
+  background-color: #f5e0c5;
+  height: 48px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  .state-simulator {
+  width: fit-content;
+  position: absolute;
+  left: 80px;
+  top: 13px;
   }
 }
 </style>

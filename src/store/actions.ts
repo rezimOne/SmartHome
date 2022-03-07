@@ -11,13 +11,6 @@ const actions = {
   },
   saveCurrentDeviceMode({ commit }, payload: any): any {
     commit('setCurrentDeviceMode', payload);
-  }
+  },
 }
 export default actions;
- // fetch('./mockData.json')
-    // .then(async response => {
-    //   const jsonObj = await response.json();
-
-    //   console.log(jsonObj)
-    //   commit('setStoreSmartDevice', jsonObj)
-    // })

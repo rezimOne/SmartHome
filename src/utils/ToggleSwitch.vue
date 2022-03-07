@@ -61,8 +61,8 @@ export default {
   user-select: none;
   cursor: pointer;
   position: absolute;
-  top: 50%;
-  left: 77%;
+  bottom: 5px;
+  /* right: 30px; */
 }
 .toggle-button input[type="checkbox"] {
   opacity: 0;

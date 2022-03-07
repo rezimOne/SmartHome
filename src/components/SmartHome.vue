@@ -1,5 +1,5 @@
 <template>
-  <div class="smart-home-box">
+  <div class="smart-home-wrapper">
     <MyClock />
     <ul class="device-categories">
       <li
@@ -20,15 +20,16 @@
         @click="showDeviceDetailsCard(device)">
         <header>
           <img :src="setSmartDeviceImg(device.type)">
-          <div>
-            <div>STATUS: <p>{{ device.isTurnedOn ? 'ON' : 'OFF' }}</p></div>
+          <div class="status-info">
+            <div>STATUS: {{ device.isTurnedOn ? 'ON' : 'OFF' }}</div>
+            <div class="status-indicator" :style="{ backgroundColor: colorByStatus(device) }"></div>
           </div>
         </header>
         <section>
-          <div><p>{{ device.name | formatProp }}</p></div>
-          <div><p>{{ device.connectionState | formatProp }}</p></div>
-          <!-- <span>ROOM: </span> -->
+          <div class="device-name"><p>{{ device.name | formatProp }}</p></div>
+          <div class="device-connection-state"><p>{{ device.connectionState | formatProp }}</p></div>
         </section>
+        <!-- <button @click="myFun(device)">CLICK</button> -->
       </li>
     </ul>
     <DeviceDetailsCard
@@ -50,9 +51,9 @@ export default {
       smartDevices: [],
       isActiveDeviceDetailsCard: false,
       deviceImages: {
-        bulbImg: require('../assets/img/smartBulb.svg'),
-        temperatureSensorImg: require('../assets/img/temperatureSensor.svg'),
-        outletImg: require('../assets/img/smartOutlet.svg')
+        bulbImg: require('../assets/img/mySmartBulb.svg'),
+        temperatureSensorImg: require('../assets/img/mySmartTemperatureSensor.svg'),
+        outletImg: require('../assets/img/mySmartOutlet.svg')
       },
       deviceDetails: {}
     }
@@ -83,6 +84,10 @@ export default {
       this.smartDevices = this.$store.getters.getDevices.filter((item: {}) => item['type'] === type);
       console.log(this.smartDevices)
       this.isActiveDeviceDetailsCard = false;
+    },
+    colorByStatus: (device: {}) => device['isTurnedOn'] ? '#60EC83' : '#FF0000',
+     myFun(device){
+      console.log(this.$store.getters.getDeviceDetailsById(device).connectionState);
     }
   },
   computed: {
@@ -96,11 +101,11 @@ export default {
       const result = item.replace(/([a-z0-9])([A-Z])/g, '$1 $2')
       return result.charAt(0).toUpperCase() + result.slice(1);
     }
-  },
+  }
 }
 </script>
 <style lang="scss" scoped>
-.smart-home-box {
+.smart-home-wrapper {
   height: 95vh;
   width: 600px;
   background-color: #e3cd86;
@@ -109,6 +114,7 @@ export default {
   padding: 0;
   margin: 0 auto;
   margin-top: 15px;
+  display: flex;
 }
 .device-categories {
   position: absolute;
@@ -158,16 +164,15 @@ export default {
   display: flex;
   flex-direction: row;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
   top: 50px;
-  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-evenly;
 }
 .smart-device {
   background-color: #7cb5ea;
   width: 155px;
   min-height: 155px;
-  margin-bottom: 10px;
-  margin-left: 20px;
   display: flex;
   flex-direction: column;
   border-radius: 15px;
@@ -181,21 +186,30 @@ export default {
     justify-content: space-evenly;
     border-radius: 10px;
     padding: 3px;
-    line-height: 20px;
-    font-size: 0.8rem;
-    p {
-      margin: 0;
+    height: 50px;
+    .status-info {
+      margin-top: 5px;
+      font-size: 0.8rem;
       display: block;
+      width: 50px;
+      height: fit-content;
+      line-height: 140%;
+    }
+    .status-indicator {
+      height: 4px;
+      background-color: green;
+      border-radius: 2px;
     }
   }
   section {
     display: block;
     line-height: 8px;
-    padding: 5px;
+    margin-top: 20px;
+    text-align: center;
   }
   img {
-    width: 22px;
-    margin: 0 6px;
+    height: 70%;
+    margin: 6px 0;
   }
   &:hover {
     background-color:#c6eca2;
