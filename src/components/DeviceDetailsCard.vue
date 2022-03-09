@@ -21,9 +21,10 @@
   </div>
 </template>
 <script lang="ts">
-import ToggleSwitch from '../utils/ToggleSwitch.vue'
-import interact from 'interactjs'
-export default {
+import Vue from 'vue';
+import ToggleSwitch from '../utils/ToggleSwitch.vue';
+import interact from 'interactjs';
+export default Vue.extend({
   name: 'DeviceDetailsCard',
   components: { ToggleSwitch },
   props: {
@@ -152,7 +153,7 @@ export default {
   beforeDestroy() {
     interact('.device-card').unset();
   }
-}
+});
 </script>
 <style lang="scss" scoped>
 .device-card {

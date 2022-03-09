@@ -41,9 +41,10 @@
   </div>
 </template>
 <script lang="ts">
-import DeviceDetailsCard from './DeviceDetailsCard.vue'
-import MyClock from '../utils/MyClock.vue'
-export default {
+import Vue from 'vue';
+import DeviceDetailsCard from './DeviceDetailsCard.vue';
+import MyClock from '../utils/MyClock.vue';
+export default Vue.extend({
   name: 'SmartDevice',
   components: { DeviceDetailsCard, MyClock },
   data() {
@@ -102,7 +103,7 @@ export default {
       return result.charAt(0).toUpperCase() + result.slice(1);
     }
   }
-}
+});
 </script>
 <style lang="scss" scoped>
 .smart-home-wrapper {

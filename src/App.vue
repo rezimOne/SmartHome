@@ -4,8 +4,9 @@
   </div>
 </template>
 <script lang="ts">
+import Vue from 'vue';
 import SmartDevice from './components/SmartHome.vue';
-export default {
+export default Vue.extend({
   name: 'App',
   components: {
     SmartDevice
@@ -13,7 +14,7 @@ export default {
    created() {
     this.$store.dispatch('saveStoreSmartDevices')
   }
-};
+});
 </script>
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
